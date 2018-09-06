@@ -26,7 +26,7 @@ export class AlertDlg extends Component<IAlertDlgProps, object> {
     }
 
     private getClass(): string {
-        let classNames: string = "alert fade show alert-dismissible";
+        let classNames: string = "alert-dlg alert fade show alert-dismissible";
 
         if (this.props.level === "error") {
             classNames = classNames + " alert-danger";
