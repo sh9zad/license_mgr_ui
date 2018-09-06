@@ -35,6 +35,7 @@
 .alert-dlg{
   position: absolute;
   z-index: 5000;
-  left: 25%;
+  left: 30%;
   top: 10px;
+  width: 45%;
 }
