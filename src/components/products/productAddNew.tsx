@@ -74,22 +74,26 @@ export class ProductAddNew extends React.Component<{}, ISate> {
 
     public render() {
         return (
-            <div className='row'>
+            <div>
                 <AlertDlg
                     level={this.state.alertType}
                     message={this.state.alertMessage}
                     visible={this.state.showAlert}
                     closeDialog={this.onCloseDialog}
                 />
-                <h3 className='col-2'>Add New Product</h3>
-                <div className='col-10'>
-                    <label>Name</label>
-                    <input className='form-control' id='name' type="text" onChange={this.onInputChange} />
-                    <label>Code</label>
-                    <input className='form-control' id='code' type="text" onChange={this.onInputChange} />
-                    <label>Salt</label>
-                    <input className='form-control' id='salt' type="text" onChange={this.onInputChange} />
-                    <button className='btn btn-success btn-small' type='button' onClick={this.onFormSubmit}><span className='fa fa-plus' /> Save</button>
+                <div className={"row"}>
+                    <h3 className={"col-sm-10"}>Add New Product</h3>
+                </div>
+                <div className={"row"}>
+                    <div className={"col-sm-9"}>
+                        <label>Name</label>
+                        <input className='form-control' id='name' type="text" onChange={this.onInputChange} />
+                        <label>Code</label>
+                        <input className='form-control' id='code' type="text" onChange={this.onInputChange} />
+                        <label>Salt</label>
+                        <input className='form-control' id='salt' type="text" onChange={this.onInputChange} />
+                        <button className='btn btn-success btn-small' type='button' onClick={this.onFormSubmit}><span className='fa fa-plus' /> Save</button>
+                    </div>
                 </div>
 
             </div>

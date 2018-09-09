@@ -1,4 +1,4 @@
-import { ProductAction } from "../actions/index.";
+import { ProductAction } from "../actions";
 import { ADD_PRODUCT, FETCH_PRODUCTS } from "../constants";
 import { IStoreState } from "../types";
 

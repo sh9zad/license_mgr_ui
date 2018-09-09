@@ -2,24 +2,15 @@ import * as React from 'react';
 import { IProduct } from '../../models/Product';
 
 
-interface IState {
+interface IProductViewProps {
   products: IProduct[]
 }
 
-export class ProductListView extends React.Component<{}, IState> {
+export class ProductListView extends React.Component<IProductViewProps, object> {
 
-  public state: IState = {
-    products: []
-  }
-
-  public componentDidMount(): void {
-    fetch('http://localhost:3030/product')
-      .then(response => response.json())
-      .then((data: any) => this.setState({ products: data }));
-  }
 
   public render() {
-    const { products } = this.state;
+    const { products } = this.props;
     const renderedProducts = products.map(product =>
       <div
         key={product._id}
