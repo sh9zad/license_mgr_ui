@@ -1,20 +1,13 @@
-import { ProductAction } from "../actions";
-import { ADD_PRODUCT, FETCH_PRODUCTS } from "../constants";
-import { IStoreState } from "../types";
-
-export function product(state: IStoreState, action: ProductAction): IStoreState {
-    switch (action.type) {
-        case ADD_PRODUCT:
-            return { ...state, product: action.payload };
-            break;
-
-        case FETCH_PRODUCTS:
-            return { ...state, products: action.payload}
-            break;
-
-        default:
-            return state;
-    }
-
-    return state;
+import * as fromProducts from './products';
+import { combineReducers } from 'redux';
+export interface State {
+    products: fromProducts.State
 }
+
+export const initialState: State = {
+    products: fromProducts.initialState
+}
+
+export const reducer = combineReducers<State>({
+    products: fromProducts.reducer
+})
