@@ -1,13 +1,13 @@
 import * as fromProducts from './products';
 import { combineReducers } from 'redux';
-export interface State {
-    products: fromProducts.State
+export interface IState {
+    products: fromProducts.IState
 }
 
-export const initialState: State = {
+export const initialState: IState = {
     products: fromProducts.initialState
 }
 
-export const reducer = combineReducers<State>({
+export const reducer = combineReducers<IState>({
     products: fromProducts.reducer
 })

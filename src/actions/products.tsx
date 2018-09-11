@@ -14,25 +14,24 @@ export interface IFetchProducts {
     type: constants.FETCH_PRODUCTS;
 }
 
-export interface AddProductAction { type: ActionTypes.ADD_PRODUCT, payload: {product: IProduct}};
-export interface GetProductAction { type: ActionTypes.FETCH_PRODUCTS };
+export interface IAddProductAction { payload: {product: IProduct}, type: ActionTypes.ADD_PRODUCT};
+export interface IGetProductAction { type: ActionTypes.FETCH_PRODUCTS };
 
-export type ProductAction = AddProductAction | GetProductAction;
+export type ProductAction = IAddProductAction | IGetProductAction;
 
-export function addProduct(product: IProduct): AddProductAction {
-    //post to API
-
-    return {
-        type: ActionTypes.ADD_PRODUCT,
+export function addProduct(product: IProduct): IAddProductAction {
+    
+    return {        
         payload: {
             product: {
                 _id: '',
             }
-        }
+        },
+        type: ActionTypes.ADD_PRODUCT,
     }
 }
 
-export function getProducts(): GetProductAction {
+export function getProducts(): IGetProductAction {
     return {type: ActionTypes.FETCH_PRODUCTS }
 }
 

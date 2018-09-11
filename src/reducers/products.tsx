@@ -2,15 +2,15 @@ import { IProduct } from '../models/Product';
 import { ProductAction, ActionTypes,  } from '../actions/products';
 
 
-export interface State {
+export interface IState {
     products: IProduct[]
 }
 
-export const initialState: State = {
+export const initialState: IState = {
     products: []
 }
 
-export function reducer( state: State = initialState, action: ProductAction) {
+export function reducer( state: IState = initialState, action: ProductAction) {
     switch (action.type) {
         case ActionTypes.ADD_PRODUCT: {
             const product = action.payload.product;
