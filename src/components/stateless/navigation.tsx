@@ -9,7 +9,12 @@ export class Navigation extends Component<object, object> {
         <ul className={"navbar-nav mr-auto"}>
           <li className={"nav-item"}>
             <Link className={"nav-link"} to={"/product"}>
-              {"Product"}
+              {"Products"}
+            </Link>
+          </li>
+          <li className={"nav-item"}>
+            <Link className={"nav-link"} to={"/account"}>
+              {"Accounts"}
             </Link>
           </li>
         </ul>
