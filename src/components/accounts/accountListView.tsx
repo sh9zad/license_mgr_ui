@@ -23,7 +23,11 @@ export class AccountListView extends React.Component<object, IState> {
     const renderedAccounts = accounts.map(account => (
       <tr key={account._id}>
         <td>{account._id}</td>
-        <td>{account.account_name}</td>
+        <td>
+          <Link to={"/account/details/" + account._id}>
+            {account.account_name}
+          </Link>
+        </td>
         <td>{account.client_code}</td>
         <td>{account.phone}</td>
         <td>{moment(account.created_date).format("MM/DD/YYYY")}</td>
