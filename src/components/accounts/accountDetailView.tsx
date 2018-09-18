@@ -1,6 +1,7 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { IAccountDetails, ILicense } from "../../models";
+import { Link } from "react-router-dom";
 
 interface IState {
   accountDetails: IAccountDetails;
@@ -27,24 +28,25 @@ export class AccountDetailView extends React.Component<
   }
 
   public render() {
-    const { accountDetails } = this.state;
+    const { account } = this.state.accountDetails;
     return (
       <div>
         <h2>Account Details</h2>
         <div className={"row  justify-content-md-center"}>
           <div className={"col-sm-1"}>Name</div>
-          <div className={"col-sm-3"}>
-            {accountDetails.account.account_name}
-          </div>
+          <div className={"col-sm-3"}>{account.account_name}</div>
 
           <div className={"col-sm-1"}>Phone</div>
-          <div className={"col-sm-3"}>{accountDetails.account.phone}</div>
+          <div className={"col-sm-3"}>{account.phone}</div>
         </div>
 
         <h3 className={"pull-left"}>License</h3>
-        <button className={"btn btn-success"}>
+        <Link
+          className={"btn btn-success"}
+          to={"/license/create/account/" + account._id}
+        >
           <span className={"fa fa-plus"} />
-        </button>
+        </Link>
         <div className={"row  justify-content-md-center"}>
           <div className={"col-sm-10"}>
             <table className={"table table-striped table-boarded"}>
