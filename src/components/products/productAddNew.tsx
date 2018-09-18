@@ -79,7 +79,7 @@ export class ProductAddNew extends React.Component<{}, ISate> {
           visible={this.state.showAlert}
           closeDialog={this.onCloseDialog}
         />
-        <div className={"row  justify-content-md-center"}>
+        <div className={"row justify-content-md-center"}>
           <h3 className={"col-sm-10"}>Add New Product</h3>
         </div>
         <div className={"row justify-content-md-center"}>
