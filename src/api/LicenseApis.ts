@@ -1,5 +1,5 @@
 import { ApiManager } from "./ApiManager";
-import * as axios from "axios";
+import axios from "axios";
 
 export class LicenseApis extends ApiManager {
   protected endpoint = "license";
@@ -9,6 +9,9 @@ export class LicenseApis extends ApiManager {
       moduleName && id
         ? this.getBaseURL() + "/" + moduleName + "/" + id
         : this.getBaseURL();
-    return axios.default.get(url)
+    return axios
+      .get(url)
+      .then(res => JSON.parse(res.data))
+      .catch(err => console.error(err));
   }
 }
