@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
-import { IAccountDetails } from "../../models";
+import { IAccountDetails, ILicense } from "../../models";
 
 interface IState {
   accountDetails: IAccountDetails;
@@ -31,7 +31,7 @@ export class AccountDetailView extends React.Component<
     return (
       <div>
         <h2>Account Details</h2>
-        <div className={"row"}>
+        <div className={"row  justify-content-md-center"}>
           <div className={"col-sm-1"}>Name</div>
           <div className={"col-sm-3"}>
             {accountDetails.account.account_name}
@@ -41,8 +41,38 @@ export class AccountDetailView extends React.Component<
           <div className={"col-sm-3"}>{accountDetails.account.phone}</div>
         </div>
 
-        <h3>License</h3>
+        <h3 className={"pull-left"}>License</h3>
+        <button className={"btn btn-success"}>
+          <span className={"fa fa-plus"} />
+        </button>
+        <div className={"row  justify-content-md-center"}>
+          <div className={"col-sm-10"}>
+            <table className={"table table-striped table-boarded"}>
+              <thead className={"thead-dark"}>
+                <tr>
+                  <th>ID</th>
+                  <th>Product</th>
+                  <th>License</th>
+                </tr>
+              </thead>
+              <tbody>{this.renderLicense()}</tbody>
+            </table>
+          </div>
+        </div>
       </div>
     );
+  }
+
+  private renderLicense() {
+    const { licenses } = this.state.accountDetails;
+    return licenses.map((license: ILicense) => {
+      return (
+        <tr key={license.id}>
+          <td>{license.id}</td>
+          <td>{license.product_id}</td>
+          <td>{license.license}</td>
+        </tr>
+      );
+    });
   }
 }
