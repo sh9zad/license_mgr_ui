@@ -14,4 +14,13 @@ export class LicenseApis extends ApiManager {
       .then(res => JSON.parse(res.data))
       .catch(err => console.error(err));
   }
+
+  public getLicenseSections(productId: string) {
+    const url: string = this.getBaseURL() + "/sections/" + productId;
+
+    return axios
+      .get(url)
+      .then(res => JSON.parse(res.data))
+      .catch(err => console.error(err));
+  }
 }
