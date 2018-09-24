@@ -15,6 +15,11 @@ export interface IProductSection {
   created_date?: Date;
 }
 
+export interface IProductSectionNamed {
+  productSection: IProductSection;
+  licenseSection: ILicenseSection;
+}
+
 export interface IProductDetails {
   product: IProduct;
   productSections: IProductSection[];

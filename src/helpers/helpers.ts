@@ -4,7 +4,7 @@ export class Helpers {
   }
 
   public static getURL(endpoint: string): string {
-    return Helpers.baseURL + "/" + Helpers.port + "/" + endpoint;
+    return Helpers.baseURL + ":" + Helpers.port + "/" + endpoint;
   }
 
   private static baseURL: string = "http://localhost";

@@ -24,7 +24,7 @@ export class ProductListView extends React.Component<object, IState> {
       <tr key={product._id}>
         <td>{product._id}</td>
         <td>
-          <Link to={"product/detail/" + product._id}>{product.name}</Link>
+          <Link to={"/product/details/" + product._id}>{product.name}</Link>
         </td>
         <td>{product.code}</td>
         <td>{product.salt}</td>
@@ -32,7 +32,7 @@ export class ProductListView extends React.Component<object, IState> {
         <td>
           <Link
             className={"btn btn-warning"}
-            to={"product/edit/" + product._id}
+            to={"/product/edit/" + product._id}
           >
             <span className={"fa fa-edit"} />
           </Link>

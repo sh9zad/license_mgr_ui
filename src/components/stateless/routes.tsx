@@ -20,6 +20,11 @@ export class ApplicationRoutes extends React.Component<object, object> {
       <Switch>
         <Route
           pathMatch="full"
+          path={"/product/details/:id"}
+          component={ProductDetailView}
+        />
+        <Route
+          pathMatch="full"
           path={"/product/edit/:id"}
           component={ProductEditView}
         />
@@ -29,11 +34,6 @@ export class ApplicationRoutes extends React.Component<object, object> {
           component={ProductAddNew}
         />
         <Route pathMatch="full" path={"/product"} component={ProductListView} />
-        <Route
-          pathMatch="full"
-          path={"/product/details/:id"}
-          component={ProductDetailView}
-        />
 
         <Route
           pathMatch="full"
