@@ -56,6 +56,9 @@ export class ProductDetailView extends React.Component<
           <div className={"col-2"}>
             Code: <strong>{product.code}</strong>
           </div>
+          <div className={"col-2"}>
+            Salt: <strong>{product.salt}</strong>
+          </div>
         </div>
         <h3 className={"pull-left"}>Sections</h3>
         <Link
