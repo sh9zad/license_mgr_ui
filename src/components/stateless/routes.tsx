@@ -13,6 +13,7 @@ import {
   AccountListView
 } from "../accounts";
 import { LicenseCreateView } from "../licenses";
+import { LicenseSectionCreateView } from "../licenseSection";
 
 export class ApplicationRoutes extends React.Component<object, object> {
   public render() {
@@ -52,6 +53,11 @@ export class ApplicationRoutes extends React.Component<object, object> {
         />
         <Route pathMatch="full" path={"/account"} component={AccountListView} />
 
+        <Route
+          pathMatch="full"
+          path={"/license/section/create/:id"}
+          component={LicenseSectionCreateView}
+        />
         <Route
           pathMatch="full"
           path={"/license/create/:module/:id"}

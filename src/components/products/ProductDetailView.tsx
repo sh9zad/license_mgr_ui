@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { IProductDetails, IProductSectionNamed } from "../../models";
 import { Helpers } from "../../helpers/helpers";
 import * as Transform from "../../helpers/transform";
@@ -57,6 +57,13 @@ export class ProductDetailView extends React.Component<
             Code: <strong>{product.code}</strong>
           </div>
         </div>
+        <h3 className={"pull-left"}>Sections</h3>
+        <Link
+          to={"/license/section/create/" + product._id}
+          className={"btn btn-success"}
+        >
+          <span className={"fa fa-plus"} />
+        </Link>
         <div className={"row justify-content-md-center"}>
           <div className={"col-10"}>
             <table className={"table table-striped table-bordered"}>
@@ -75,7 +82,7 @@ export class ProductDetailView extends React.Component<
     );
   }
 
-  private renderLicenseSections(): any {
+  private renderLicenseSections(): JSX.Element[] {
     const { sectionsNamed } = this.state;
 
     return sectionsNamed.map(
