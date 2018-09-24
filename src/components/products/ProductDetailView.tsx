@@ -75,6 +75,8 @@ export class ProductDetailView extends React.Component<
                   <th>#</th>
                   <th>Name</th>
                   <th>Type</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>{licenseSections}</tbody>
@@ -102,6 +104,19 @@ export class ProductDetailView extends React.Component<
               {sectionNamed.licenseSection && sectionNamed.licenseSection.type
                 ? sectionNamed.licenseSection.type
                 : ""}
+            </td>
+            <td>
+              <Link
+                to={"/license/section/edit/" + sectionNamed.licenseSection._id}
+                className={"btn btn-warning"}
+              >
+                <span className={"fa fa-edit"} />
+              </Link>
+            </td>
+            <td>
+              <button className={"btn btn-danger"}>
+                <span className={"fa fa-remove"} />
+              </button>
             </td>
           </tr>
         );
