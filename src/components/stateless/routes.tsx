@@ -1,6 +1,11 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import { ProductAddNew, ProductListView, ProductEditView } from "../products";
+import {
+  ProductAddNew,
+  ProductListView,
+  ProductEditView,
+  ProductDetailView
+} from "../products";
 import {
   AccountAddNew,
   AccountDetailView,
@@ -24,6 +29,11 @@ export class ApplicationRoutes extends React.Component<object, object> {
           component={ProductAddNew}
         />
         <Route pathMatch="full" path={"/product"} component={ProductListView} />
+        <Route
+          pathMatch="full"
+          path={"/product/details/:id"}
+          component={ProductDetailView}
+        />
 
         <Route
           pathMatch="full"

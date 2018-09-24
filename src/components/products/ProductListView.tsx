@@ -23,12 +23,17 @@ export class ProductListView extends React.Component<object, IState> {
     const renderedProducts = products.map(product => (
       <tr key={product._id}>
         <td>{product._id}</td>
-        <td>{product.name}</td>
+        <td>
+          <Link to={"product/detail/" + product._id}>{product.name}</Link>
+        </td>
         <td>{product.code}</td>
         <td>{product.salt}</td>
         <td>{moment(product.created_date).format("MM/DD/YYYY")}</td>
         <td>
-          <Link className={"btn btn-warning"} to={"product/edit/" + product._id}>
+          <Link
+            className={"btn btn-warning"}
+            to={"product/edit/" + product._id}
+          >
             <span className={"fa fa-edit"} />
           </Link>
         </td>
