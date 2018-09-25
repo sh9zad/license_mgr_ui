@@ -27,9 +27,28 @@ export class LicenseSectionEditView extends React.Component<
   }
 
   public render() {
+    const { licenseSection } = this.state;
     return (
       <div>
         <h3>Edit License Section</h3>
+        <div className={"row justify-content-md-center"}>
+          <form className={"col-5"}>
+            Name:{" "}
+            <input className={"form-control"} value={licenseSection.name} />
+            Type:{" "}
+            <select
+              className={"form-control"}
+              value={licenseSection.type ? licenseSection.name : ""}
+            >
+              <option value={""}> - </option>
+              <option value={"date"}> Date </option>
+              <option value={"number"}> Number </option>
+            </select>
+            <button className={"btn btn-success"}>
+              <span className={"fa fa-save"} /> Update
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
