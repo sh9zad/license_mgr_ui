@@ -70,7 +70,6 @@ export class ProductEditView extends React.Component<
         }
       })
       .catch((reason: any) => {
-        console.log("here");
         this.setState({
           alertMessage: reason,
           showAlert: true

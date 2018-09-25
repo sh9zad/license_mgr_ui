@@ -26,28 +26,76 @@ export class LicenseSectionEditView extends React.Component<
       .then(data => this.setState({ licenseSection: data }));
   }
 
+  public inputChangeHandler(
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ): void {
+    const { licenseSection } = this.state;
+    licenseSection[e.currentTarget.id] = e.currentTarget.value;
+    this.setState({ licenseSection });
+  }
+
+  public formSubmitHandler() {
+    const { licenseSection } = this.state;
+
+    const url: string = Helpers.getURL(
+      this.endpoint + "/section/" + licenseSection._id
+    );
+
+    fetch(url, {
+      body: JSON.stringify(licenseSection),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "PUT"
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  public onInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ): void => this.inputChangeHandler(e);
+  public onFormSubmit = (): void => this.formSubmitHandler();
+
   public render() {
     const { licenseSection } = this.state;
     return (
       <div>
         <h3>Edit License Section</h3>
         <div className={"row justify-content-md-center"}>
-          <form className={"col-5"}>
+          <div className={"col-10"}>
             Name:{" "}
-            <input className={"form-control"} value={licenseSection.name} />
+            <input
+              id={"name"}
+              className={"form-control"}
+              onChange={this.onInputChange}
+              defaultValue={licenseSection.name}
+            />
             Type:{" "}
             <select
+              id={"type"}
               className={"form-control"}
-              value={licenseSection.type ? licenseSection.name : ""}
+              onChange={this.onInputChange}
+              defaultValue={licenseSection.type ? licenseSection.type : ""}
             >
               <option value={""}> - </option>
               <option value={"date"}> Date </option>
               <option value={"number"}> Number </option>
             </select>
-            <button className={"btn btn-success"}>
+            <button className={"btn btn-success"} onClick={this.onFormSubmit}>
               <span className={"fa fa-save"} /> Update
             </button>
-          </form>
+          </div>
         </div>
       </div>
     );
