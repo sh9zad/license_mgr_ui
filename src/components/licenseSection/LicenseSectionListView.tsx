@@ -41,26 +41,41 @@ export class LicenseSectionListView extends React.Component<
 
   public render() {
     return (
-      <div className={"row justify-content-md-center"}>
-        <h3>List License Segment</h3>
-        <div className={"col-10"}>
-          <table className={"table table-striped table-bordered"}>
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>{this.renderSections()}</tbody>
-          </table>
+      <div>
+        <div className={"row justify-content-md-center"}>
+          <div className={"col-5"}>
+            <h3>License Segments</h3>
+          </div>
+          <div className={"col-2"}>
+            <button className={"btn btn-primary"} onClick={this.onAssignClick}>
+              <span className={"fa fa-tasks"} /> Assign
+            </button>
+          </div>
+        </div>
+        <div className={"row justify-content-md-center"}>
+          <div className={"col-10"}>
+            <table className={"table table-striped table-bordered"}>
+              <thead>
+                <tr>
+                  <th>Select</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>{this.renderSections()}</tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
   }
+
+  private onAssignClick = (): void => this.onAssignClickHandler();
+  private onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
+    this.onCheckBoxChangeHandler(e);
 
   private onCheckBoxChangeHandler(
     e: React.ChangeEvent<HTMLInputElement>
@@ -82,8 +97,11 @@ export class LicenseSectionListView extends React.Component<
     }
   }
 
-  private onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
-    this.onCheckBoxChangeHandler(e);
+  private onAssignClickHandler(): void {
+    const { selectedSections } = this.state;
+
+    console.log(selectedSections);
+  }
 
   private renderSections(): JSX.Element[] {
     const { licenseSections } = this.state;
