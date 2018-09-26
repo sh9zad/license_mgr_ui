@@ -2,7 +2,7 @@ import * as React from "react";
 import { IProduct } from "../../models/Product";
 import { RouteComponentProps } from "react-router";
 import { AlertDlg } from "../stateless/alert";
-import { LicenseSectionListView } from "../licenseSection";
+// import { LicenseSectionListView } from "../licenseSection";
 
 interface IState {
   product: IProduct;
@@ -130,9 +130,7 @@ export class ProductEditView extends React.Component<
             </button>
           </div>
         </div>
-        <div className={"row justify-content-md-center"}>
-          <LicenseSectionListView />
-        </div>
+        <div className={"row justify-content-md-center"} />
       </div>
     );
   }

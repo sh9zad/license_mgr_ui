@@ -24,7 +24,9 @@ export class ProductListView extends React.Component<object, IState> {
       <tr key={product._id}>
         <td>{product._id}</td>
         <td>
-          <Link to={"/product/details/" + product._id}>{product.name}</Link>
+          <Link id={product._id} to={"/product/details/" + product._id}>
+            {product.name}
+          </Link>
         </td>
         <td>{product.code}</td>
         <td>{product.salt}</td>

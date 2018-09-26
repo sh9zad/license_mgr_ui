@@ -32,15 +32,16 @@ export class ProductDetailView extends React.Component<
 
     fetch(url)
       .then(response => response.json())
-      .then((data: IProductDetails) =>
+      .then((data: IProductDetails) => {
+        localStorage.setItem("product", JSON.stringify(data.product));
         this.setState({
           productDetails: data,
           sectionsNamed: Transform.combineLicenseSection(
             data.productSections,
             data.licenseSections
           )
-        })
-      );
+        });
+      });
   }
 
   public render() {

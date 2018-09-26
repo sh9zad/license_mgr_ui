@@ -86,11 +86,12 @@ export class LicenseSectionEditView extends React.Component<
               id={"type"}
               className={"form-control"}
               onChange={this.onInputChange}
-              defaultValue={licenseSection.type ? licenseSection.type : ""}
+              value={licenseSection.type ? licenseSection.type : ""}
             >
               <option value={""}> - </option>
               <option value={"date"}> Date </option>
               <option value={"number"}> Number </option>
+              <option value={"string"}> String </option>
             </select>
             <button className={"btn btn-success"} onClick={this.onFormSubmit}>
               <span className={"fa fa-save"} /> Update
