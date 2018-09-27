@@ -51,6 +51,11 @@ export class LicenseSectionListView extends React.Component<
               <span className={"fa fa-tasks"} /> Assign
             </button>
           </div>
+          <div className={"col-2"}>
+            <Link className={"btn btn-success"} to={"/"}>
+              <span className={"fa fa-plus"} /> Create
+            </Link>
+          </div>
         </div>
         <div className={"row justify-content-md-center"}>
           <div className={"col-10"}>
@@ -99,8 +104,23 @@ export class LicenseSectionListView extends React.Component<
 
   private onAssignClickHandler(): void {
     const { selectedSections } = this.state;
+    const urlSegments = Helpers.getURLSegments(this.props.location.pathname);
+    const url: string = Helpers.getURL(
+      this.endpoint +
+        "/section/relate/product/" +
+        urlSegments[urlSegments.length - 1]
+    );
 
-    console.log(selectedSections);
+    fetch(url, {
+      body: JSON.stringify(selectedSections),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+      .then(response => response.json())
+      .catch(err => console.error(err));
   }
 
   private renderSections(): JSX.Element[] {
@@ -124,7 +144,7 @@ export class LicenseSectionListView extends React.Component<
             <td>
               <Link
                 className={"btn btn-warning"}
-                to={"license/edit/" + section._id}
+                to={"/license/section/edit/" + section._id}
               >
                 <span className={"fa fa-edit"} />
               </Link>
