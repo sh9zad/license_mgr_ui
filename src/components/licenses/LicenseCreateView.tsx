@@ -1,11 +1,11 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
-import { ILicense, IProduct, IAccount } from "../../models";
+import { IProduct, IAccount, ILicenseSection } from "../../models";
 import { Helpers } from "../../helpers/helpers";
 
 interface ILicenseCreateViewState {
-  license?: ILicense;
-  products?: IProduct[];
+  licenseSections: ILicenseSection[];
+  products: IProduct[];
   accounts?: IAccount[];
   module?: string;
   _id?: string;
@@ -15,17 +15,23 @@ export class LicenseCreateView extends React.Component<
   RouteComponentProps<any>,
   ILicenseCreateViewState
 > {
-  public state: ILicenseCreateViewState = {};
+  public state: ILicenseCreateViewState = {
+    licenseSections: [],
+    products: []
+  };
 
   public componentDidMount(): void {
     const pathSegments = Helpers.getURLSegments(this.props.location.pathname);
-    if (pathSegments.length === 5) {
-      this.setState({
-        ...this.state,
-        _id: pathSegments[pathSegments.length - 1],
-        module: pathSegments[pathSegments.length - 2]
-      });
-    }
+    const url: string = Helpers.getURL("product");
+    fetch(url)
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          _id: pathSegments[pathSegments.length - 1],
+          module: pathSegments[pathSegments.length - 2],
+          products: data
+        })
+      );
   }
 
   public render() {
@@ -35,15 +41,21 @@ export class LicenseCreateView extends React.Component<
         <div className={"row justify-content-md-center"}>
           <div className={"col-2"}>Product</div>
           <div className={"col-3"}>
-            <select className={"form-control"}>
+            <select className={"form-control"} onChange={this.onProductChange}>
               <option value={0}> Select </option>
+              {this.renderProduct()}
             </select>
           </div>
 
           <div className={"col-2"}>License Options</div>
           <div className={"col-3"}>
-            <select className={"form-control"} multiple={true}>
+            <select
+              className={"form-control"}
+              multiple={true}
+              onChange={this.onSectionChange}
+            >
               <option value={0}> Select </option>
+              {this.renderSections()}
             </select>
           </div>
         </div>
@@ -60,5 +72,48 @@ export class LicenseCreateView extends React.Component<
         </div>
       </div>
     );
+  }
+
+  private onProductChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
+    this.onProductChangeHandler(e);
+
+  private onSectionChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
+    this.onSectionChangeHandler(e);
+
+  private onSectionChangeHandler(
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): void {
+    console.log(e.currentTarget.value);
+  }
+
+  private onProductChangeHandler(
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): void {
+    console.log(e.currentTarget.value);
+    const url = Helpers.getURL("license/section/" + e.currentTarget.value);
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.setState({ licenseSections: data.licenseSections }));
+  }
+
+  private renderProduct(): JSX.Element[] {
+    return this.state.products.map(product => {
+      return (
+        <option key={product._id} value={product._id}>
+          {product.name}
+        </option>
+      );
+    });
+  }
+
+  private renderSections(): JSX.Element[] {
+    return this.state.licenseSections.map(section => {
+      return (
+        <option key={section._id} value={section._id}>
+          {section.name}
+        </option>
+      );
+    });
   }
 }
