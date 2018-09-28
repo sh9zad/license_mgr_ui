@@ -5,7 +5,9 @@ import { Helpers } from "../../helpers/helpers";
 
 interface ILicenseCreateViewState {
   licenseSections: ILicenseSection[];
+  selectedProductID: string;
   products: IProduct[];
+  selectedSectionIds: string[];
   accounts?: IAccount[];
   module?: string;
   _id?: string;
@@ -17,7 +19,9 @@ export class LicenseCreateView extends React.Component<
 > {
   public state: ILicenseCreateViewState = {
     licenseSections: [],
-    products: []
+    products: [],
+    selectedProductID: "",
+    selectedSectionIds: []
   };
 
   public componentDidMount(): void {
@@ -66,7 +70,10 @@ export class LicenseCreateView extends React.Component<
         </div>
 
         <div className={"row  justify-content-md-center"}>
-          <button className={"btn btn-success"}>
+          <button
+            className={"btn btn-success"}
+            onClick={this.onGenerateLicenseClick}
+          >
             <span className="fa fa-save" /> Generate License
           </button>
         </div>
@@ -74,27 +81,68 @@ export class LicenseCreateView extends React.Component<
     );
   }
 
+  private onGenerateLicenseClick = (): void =>
+    this.onGenerateLicenseClickHandler();
+
   private onProductChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
     this.onProductChangeHandler(e);
 
   private onSectionChange = (e: React.ChangeEvent<HTMLSelectElement>): void =>
     this.onSectionChangeHandler(e);
 
+  private onGenerateLicenseClickHandler(): void {
+    console.log(this.state.selectedSectionIds, this.state.selectedProductID);
+    const url: string = Helpers.getURL(
+      "license/section/relate/product/" + this.state.selectedProductID
+    );
+
+    console.log(url);
+
+    fetch(url, {
+      body: JSON.stringify(this.state.selectedSectionIds),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
+
   private onSectionChangeHandler(
     e: React.ChangeEvent<HTMLSelectElement>
   ): void {
-    console.log(e.currentTarget.value);
+    if (e.currentTarget.selectedOptions.length > 0) {
+      const selectedSectionIds: string[] = [];
+
+      // tslint:disable-next-line
+      for (let i = 0; i < e.currentTarget.selectedOptions.length; i++) {
+        selectedSectionIds.push(
+          e.currentTarget.selectedOptions[i].value.toString()
+        );
+      }
+
+      this.setState({ ...this.setState, selectedSectionIds });
+    }
   }
 
   private onProductChangeHandler(
     e: React.ChangeEvent<HTMLSelectElement>
   ): void {
-    console.log(e.currentTarget.value);
-    const url = Helpers.getURL("license/section/" + e.currentTarget.value);
+    const productId = e.currentTarget.value;
+    const url = Helpers.getURL("license/section/" + productId);
 
     fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ licenseSections: data.licenseSections }));
+      .then(data =>
+        this.setState({
+          licenseSections: data.licenseSections,
+          selectedProductID: productId,
+          selectedSectionIds: []
+        })
+      );
   }
 
   private renderProduct(): JSX.Element[] {
