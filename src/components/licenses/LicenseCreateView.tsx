@@ -10,7 +10,7 @@ interface ILicenseCreateViewState {
   selectedSectionIds: string[];
   accounts?: IAccount[];
   module?: string;
-  _id?: string;
+  _id: string;
 }
 
 export class LicenseCreateView extends React.Component<
@@ -18,6 +18,7 @@ export class LicenseCreateView extends React.Component<
   ILicenseCreateViewState
 > {
   public state: ILicenseCreateViewState = {
+    _id: "",
     licenseSections: [],
     products: [],
     selectedProductID: "",
@@ -91,12 +92,9 @@ export class LicenseCreateView extends React.Component<
     this.onSectionChangeHandler(e);
 
   private onGenerateLicenseClickHandler(): void {
-    console.log(this.state.selectedSectionIds, this.state.selectedProductID);
     const url: string = Helpers.getURL(
-      "license/section/relate/product/" + this.state.selectedProductID
+      `account/create/license/${this.state._id}/${this.state.selectedProductID}`
     );
-
-    console.log(url);
 
     fetch(url, {
       body: JSON.stringify(this.state.selectedSectionIds),

@@ -69,8 +69,8 @@ export class AccountDetailView extends React.Component<
     const { licenses } = this.state.accountDetails;
     return licenses.map((license: ILicense) => {
       return (
-        <tr key={license.id}>
-          <td>{license.id}</td>
+        <tr key={license._id}>
+          <td>{license._id}</td>
           <td>{license.product_id}</td>
           <td>{license.license}</td>
         </tr>
